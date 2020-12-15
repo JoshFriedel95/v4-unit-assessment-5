@@ -71,3 +71,7 @@
     justify-content: space-around;
     width: 55%;
   }
+
+  @media(max-width: 400px){
+    
+  }
