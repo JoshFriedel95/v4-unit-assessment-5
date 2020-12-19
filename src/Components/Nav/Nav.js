@@ -7,6 +7,7 @@ import './Nav.css';
 import {Link, withRouter} from 'react-router-dom'
 import {connect} from 'react-redux'
 import {updateUser, logoutUser} from '../../ducks/reducer'
+// import userEvent from '@testing-library/user-event';
 
 class Nav extends Component {
   constructor(props) {
@@ -22,12 +23,12 @@ class Nav extends Component {
 
   getUser() {
     axios.get('/api/auth/me')
-    .then(res => 'replace this string with something useful')
+    .then(res => alert('You are logged in as'))
   }
   
   logout() {
     axios.post('/api/auth/logout')
-      .then(_ => 'replace this string with something else')
+      .then(_ => alert('You have been logged out'))
   }
   
   render() {
@@ -35,8 +36,12 @@ class Nav extends Component {
       return this.props.location.pathname !== '/' &&
         <div className='nav'>
           <div className='nav-profile-container'>
-            <div className='nav-profile-pic'></div>
-            <p>placeholder username</p>
+            <div className='nav-profile-pic'>
+              <img className= 'nav-profile-pic' 
+              src={this.props.profilePic}
+              alt='profile pic'/>
+            </div>
+            <p>{this.props.username}</p>
           </div>
           <div className='nav-links'>
             <Link to='/dash'>
@@ -55,4 +60,4 @@ class Nav extends Component {
 function mapStateToProps(state) {
   return state;
 }
-export default withRouter(connect(mapStateToProps, {updateUser, logoutUser}))(Nav);
+export default withRouter(connect(mapStateToProps, {updateUser, logoutUser})(Nav));
